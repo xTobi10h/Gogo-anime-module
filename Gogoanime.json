@@ -11,6 +11,6 @@
     "quality": "720p",
     "baseUrl": "https://gogoanime-api.vercel.app",
     "searchBaseUrl": "https://gogoanime-api.vercel.app/search?q=%s",
-    "scriptUrl": "https://cdn.jsdelivr.net/gh/xTobi10h/Gogo-anime-module/gogoanime.js",
+    "scriptUrl": "https://github.com/xTobi10h/Gogo-anime-module/blob/main/gogoanime.js",
     "asyncJS": true
 }
