@@ -3,18 +3,30 @@
  */
 
 const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+const BASE_URL = "https://gogoanime.by";
 
 // Search for anime titles
 async function searchAnime(query) {
-    const searchUrl = `${CORS_PROXY}https://gogoanime-api.vercel.app/search?q=${encodeURIComponent(query)}`;
+    const searchUrl = `${CORS_PROXY}${BASE_URL}/search.html?keyword=${encodeURIComponent(query)}`;
     const response = await fetch(searchUrl);
-    const results = await response.json();
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
 
-    return results.map(item => ({
-        title: item.animeTitle,
-        url: item.animeUrl,
-        image: item.animeImg
-    }));
+    let results = [];
+    doc.querySelectorAll(".items li").forEach(item => {
+        const aTag = item.querySelector("a");
+        const imgTag = item.querySelector("img");
+        if (aTag && imgTag) {
+            results.push({
+                title: aTag.getAttribute("title"),
+                url: BASE_URL + aTag.getAttribute("href"),
+                image: imgTag.getAttribute("src")
+            });
+        }
+    });
+
+    return results;
 }
 
 // Get episode list from an anime page
@@ -25,14 +37,14 @@ async function getEpisodeList(animeUrl) {
     const doc = parser.parseFromString(html, "text/html");
 
     let episodes = [];
-    doc.querySelectorAll(".items li a").forEach(a => {
+    doc.querySelectorAll("#episode_page a").forEach(a => {
         episodes.push({
             title: a.textContent.trim(),
-            url: a.href
+            url: BASE_URL + a.getAttribute("href")
         });
     });
 
-    return episodes;
+    return episodes.reverse(); // Sort episodes correctly
 }
 
 // Get streaming URL from an episode page
