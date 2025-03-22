@@ -9,8 +9,8 @@
     "language": "English",
     "streamType": "HLS",
     "quality": "1080p",
-    "baseUrl": "https://gogoanime-api.vercel.app",
-    "searchBaseUrl": "https://gogoanime-api.vercel.app/search?q=%s",
+    "baseUrl": "https://anitaku.to",
+    "searchBaseUrl": "https://anitaku.to/search?q=%s",
     "scriptUrl": "https://raw.githubusercontent.com/xTobi10h/Gogo-anime-module/main/gogoanime.js",
     "asyncJS": true
 }
