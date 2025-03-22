@@ -3,14 +3,14 @@
     "iconUrl": "https://raw.githubusercontent.com/xTobi10h/Gogo-anime-module/main/icon.png",
     "author": {
         "name": "xTobi10h",
-        "icon": "https://avatars.githubusercontent.com/u/00000000" 
+        "icon": "https://avatars.githubusercontent.com/u/00000000"
     },
     "version": "1.0.0",
     "language": "English",
     "streamType": "HLS",
     "quality": "1080p",
     "baseUrl": "https://gogoanime.by",
-    "searchBaseUrl": "https://gogoanime.by/search?q=%s",
+    "searchBaseUrl": "https://gogoanime.by/search.html?keyword=%s",
     "scriptUrl": "https://raw.githubusercontent.com/xTobi10h/Gogo-anime-module/main/gogoanime.js",
     "asyncJS": true
 }
