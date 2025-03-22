@@ -1,5 +1,5 @@
 /**
- * Gogoanime module for Sora
+ * Gogoanime module for Sora (with CORS proxy)
  */
 
 const CORS_PROXY = "https://api.allorigins.win/raw?url=";
@@ -22,10 +22,10 @@ async function getEpisodeList(animeUrl) {
     const response = await fetch(`${CORS_PROXY}${animeUrl}`);
     const html = await response.text();
     const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+    const doc = parser.parseFromString(html, "text/html");
 
     let episodes = [];
-    doc.querySelectorAll('.items li a').forEach(a => {
+    doc.querySelectorAll(".items li a").forEach(a => {
         episodes.push({
             title: a.textContent.trim(),
             url: a.href
@@ -40,9 +40,9 @@ async function getVideoUrl(episodeUrl) {
     const response = await fetch(`${CORS_PROXY}${episodeUrl}`);
     const html = await response.text();
     const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+    const doc = parser.parseFromString(html, "text/html");
 
-    const iframe = doc.querySelector('iframe');
+    const iframe = doc.querySelector("iframe");
     return iframe ? iframe.src : null;
 }
 
