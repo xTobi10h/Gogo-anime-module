@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gogoanime Search</title>
+</head>
+<body>
+    <h1>Search for Anime</h1>
+    <input type="text" id="searchInput" placeholder="Enter anime name">
+    <button onclick="searchAnime()">Search</button>
+    <div id="results"></div>
+
+    <script>
+        function searchAnime() {
+            const query = document.getElementById("searchInput").value;
+            const apiUrl = `https://api.consumet.org/anime/gogoanime/${encodeURIComponent(query)}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const resultsDiv = document.getElementById("results");
+                    resultsDiv.innerHTML = `<h2>${data.title}</h2><a href="${data.url}">Watch Now</a>`;
+                })
+                .catch(error => console.error("Error fetching data:", error));
+        }
+    </script>
+</body>
+</html>
