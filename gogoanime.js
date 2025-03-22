@@ -1,66 +1,50 @@
-async function searchAnime(query) {
-    const searchUrl = `https://anitaku.to/search?keyword=${encodeURIComponent(query)}`;
-    const response = await fetch(searchUrl);
-    const text = await response.text();
+/**
+ * Gogoanime module for Sora
+ */
 
-    const results = [];
-    const regex = /<a href="(\/category\/.*?)".*?>(.*?)<\/a>/g;
-    let match;
-    
-    while ((match = regex.exec(text)) !== null) {
-        results.push({
-            title: match[2],
-            url: `https://anitaku.to${match[1]}`
-        });
-    }
-    
-    return results;
+const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+
+// Search for anime titles
+async function searchAnime(query) {
+    const searchUrl = `${CORS_PROXY}https://gogoanime-api.vercel.app/search?q=${encodeURIComponent(query)}`;
+    const response = await fetch(searchUrl);
+    const results = await response.json();
+
+    return results.map(item => ({
+        title: item.animeTitle,
+        url: item.animeUrl,
+        image: item.animeImg
+    }));
 }
 
-async function getEpisodes(animeUrl) {
-    const response = await fetch(animeUrl);
-    const text = await response.text();
+// Get episode list from an anime page
+async function getEpisodeList(animeUrl) {
+    const response = await fetch(`${CORS_PROXY}${animeUrl}`);
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
 
-    const episodes = [];
-    const regex = /<a href="(\/vidcdn\/.*?)".*?>(.*?)<\/a>/g;
-    let match;
-    
-    while ((match = regex.exec(text)) !== null) {
+    let episodes = [];
+    doc.querySelectorAll('.items li a').forEach(a => {
         episodes.push({
-            episode: match[2],
-            url: `https://anitaku.to${match[1]}`
+            title: a.textContent.trim(),
+            url: a.href
         });
-    }
-    
+    });
+
     return episodes;
 }
 
-async function getStreamUrl(episodeUrl) {
-    const response = await fetch(episodeUrl);
-    const text = await response.text();
+// Get streaming URL from an episode page
+async function getVideoUrl(episodeUrl) {
+    const response = await fetch(`${CORS_PROXY}${episodeUrl}`);
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
 
-    const streamRegex = /<source src="(.*?)"/;
-    const match = streamRegex.exec(text);
-    
-    if (match) {
-        return match[1];
-    } else {
-        throw new Error("Stream URL not found");
-    }
+    const iframe = doc.querySelector('iframe');
+    return iframe ? iframe.src : null;
 }
 
-// Example Usage
-(async () => {
-    const searchResults = await searchAnime("One Piece");
-    console.log("Search Results:", searchResults);
-
-    if (searchResults.length > 0) {
-        const episodes = await getEpisodes(searchResults[0].url);
-        console.log("Episodes:", episodes);
-
-        if (episodes.length > 0) {
-            const streamUrl = await getStreamUrl(episodes[0].url);
-            console.log("Stream URL:", streamUrl);
-        }
-    }
-})();
+// Export functions
+export { searchAnime, getEpisodeList, getVideoUrl };
