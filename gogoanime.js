@@ -1,5 +1,5 @@
 /**
- * Gogoanime module for Sora (No CORS proxy)
+ * Gogoanime module for Sora
  */
 
 const BASE_URL = "https://gogoanime.by";
