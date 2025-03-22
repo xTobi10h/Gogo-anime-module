@@ -1,16 +1,16 @@
 {
-    "sourceName": "Gogoanime",
-    "iconUrl": "https://cdn.jsdelivr.net/gh/xTobi10h/Gogo-anime-module/icon.png",
+    "sourceName": "GogoAnime",
+    "iconUrl": "https://raw.githubusercontent.com/xTobi10h/Gogo-anime-module/main/icon.png",
     "author": {
-        "name": "Coby",
-        "icon": "https://your-source.com/author-icon.png"
+        "name": "xTobi10h",
+        "icon": "https://avatars.githubusercontent.com/u/00000000" 
     },
     "version": "1.0.0",
     "language": "English",
     "streamType": "HLS",
-    "quality": "720p",
+    "quality": "1080p",
     "baseUrl": "https://gogoanime-api.vercel.app",
     "searchBaseUrl": "https://gogoanime-api.vercel.app/search?q=%s",
-    "scriptUrl": "https://github.com/xTobi10h/Gogo-anime-module/blob/main/gogoanime.js",
+    "scriptUrl": "https://raw.githubusercontent.com/xTobi10h/Gogo-anime-module/main/gogoanime.js",
     "asyncJS": true
 }
