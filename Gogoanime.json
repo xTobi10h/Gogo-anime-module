@@ -1,18 +1,16 @@
 {
-   "sourceName": "Gogoanime",
-   "iconUrl": "https://raw.githubusercontent.com/kodjodevf/mangayomi-extensions/main/dart/anime/src/en/gogoanime/icon.png",
-   "author": {
-       "name": "Coby",
-       "icon": "https://your-source.com/author-icon.png"
-   },
-   "version": "1.0.0",
-   "language": "English",
-   "streamType": "HLS",
-   "quality": "720p",
-   "baseUrl": "https://anitaku.to",
-   "searchBaseUrl": "https://anitaku.to/search?keyword=%s",
-   "scriptUrl": "https://raw.githubusercontent.com/xTobi10h/Gogo-anime-module/main/gogoanime.js",
-   "asyncJS": true,
-   "streamAsyncJS": false,
-   "softsub": true
+    "sourceName": "Gogoanime",
+    "iconUrl": "https://raw.githubusercontent.com/xTobi10h/Gogo-anime-module/main/icon.png",
+    "author": {
+        "name": "Coby",
+        "icon": "https://your-source.com/author-icon.png"
+    },
+    "version": "1.0.0",
+    "language": "English",
+    "streamType": "HLS",
+    "quality": "720p",
+    "baseUrl": "https://gogoanime-api.vercel.app",
+    "searchBaseUrl": "https://gogoanime-api.vercel.app/search?q=%s",
+    "scriptUrl": "https://cdn.jsdelivr.net/gh/xTobi10h/Gogo-anime-module/gogoanime.js",
+    "asyncJS": true
 }
