@@ -1,5 +1,5 @@
 /**
- * Gogoanime module for Sora (NO CORS proxy)
+ * Gogoanime module for Sora (No CORS proxy)
  */
 
 const BASE_URL = "https://gogoanime.by";
@@ -43,7 +43,7 @@ async function getEpisodeList(animeUrl) {
         });
     });
 
-    return episodes.reverse(); // Sort episodes correctly
+    return episodes.reverse(); // Sort episodes in ascending order
 }
 
 // Get streaming URL from an episode page
